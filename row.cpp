@@ -2,96 +2,96 @@
 #include <stdlib.h>
 #include <locale.h>
 
-#define tamanho 5
+#define size 5
 
-struct estrutura
+struct scope
 {
-    int dados[tamanho];
-    int ini;
-    int fim;
+    int data[size];
+    int start;
+    int end;
 };
 
-struct estrutura fila;
+struct scope row;
 int op;
 
-void fila_entrar();
-void fila_sair();
-void fila_mostrar();
-void menu_mostrar();
+void row_enter();
+void row_exit();
+void row_view();
+void menu_view();
 
 int main()
 {
     op = 1;
-    fila.ini = 0;
-    fila.fim = 0;
+    row.start = 0;
+    row.end = 0;
     while (op != 0)
     {
         system("cls");
-        menu_mostrar();
-        fila_mostrar();
+        menu_view();
+        row_view();
         scanf("%d", &op);
         switch (op)
         {
         case 1:
-            fila_entrar();
+            row_enter();
             break;
         case 2:
-            fila_sair();
+            row_exit();
             break;
         }
     }
     return (0);
 }
 
-void fila_entrar()
+void row_enter()
 {
-    if (fila.fim == tamanho)
+    if (row.end == size)
     {
-        printf("\nA fila está cheia, remova algum valor!\n\n");
+        printf("\n A fila está cheia, remova algum valor!\n\n");
         system("Pause");
     }
     else
     {
-        printf("\nDigite o valor a ser inserido: ");
-        scanf("%d", &fila.dados[fila.fim]);
-        fila.fim++;
+        printf("\n Digite o valor a ser inserido: ");
+        scanf("%d", &row.data[row.end]);
+        row.end++;
     }
 }
 
-void fila_sair()
+void row_exit()
 {
-    if (fila.ini == fila.fim)
+    if (row.start == row.end)
     {
-        printf("\nA fila esta vazia, adicione algum valor primeiro!\n");
+        printf("\n A fila esta vazia, adicione algum valor primeiro!\n");
         system("pause");
     }
     else
     {
         int i;
-        for (i = 0; i < tamanho; i++)
+        for (i = 0; i < size; i++)
         {
-            fila.dados[i] = fila.dados[i + 1];
+            row.data[i] = row.data[i + 1];
         }
-        fila.dados[fila.fim] = 0;
-        fila.fim--;
+        row.data[row.end] = 0;
+        row.end--;
     }
 }
 
-void fila_mostrar()
+void row_view()
 {
     int i;
     printf("[ ");
-    for (i = 0; i < tamanho; i++)
+    for (i = 0; i < size; i++)
     {
-        printf(" %d", fila.dados[i]);
+        printf(" %d", row.data[i]);
     }
     printf(" ]\n\n");
 }
 
-void menu_mostrar()
+void menu_view()
 {
 
-    printf("\nEscolha uma alternativa:\n");
+    printf("\n Escolha uma alternativa:\n");
     printf("1- Incluir na fila\n");
     printf("2- Excluir da fila\n");
     printf("0- Sair\n\n");
